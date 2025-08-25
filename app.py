@@ -9,7 +9,7 @@ st.set_page_config(page_title="Painel de Atendimento Médico", layout="wide")
 
 @st.cache_data
 def carregar_dados():
-    df = pd.read_csv("planilha_pacientes.csv", sep=';', encoding='latin-1')
+    df = pd.read_csv("CIENCIASDEDADOS/atendimentos.csv", sep=';', encoding='latin-1')
     df.columns = df.columns.str.strip()
     return df
 
@@ -38,7 +38,7 @@ with st.container():
     with col_graf1:
         st.markdown("Atendimentos por Médico")
         fig1, ax1 = plt.subplots(figsize=(3.5, 2.5))
-        sns.countplot(data=df, x="Medico", ax=ax1, palette="coolwarm")
+        sns.countplot(data=df, x="Médico", ax=ax1, palette="coolwarm")
         ax1.set_xlabel("")
         ax1.set_ylabel("Qtd")
         plt.xticks(rotation=45)
@@ -67,7 +67,7 @@ with st.container():
     with col_graf4:
         st.markdown("Distribuição por Gênero")
         fig4, ax4 = plt.subplots(figsize=(3.5, 2.5))
-        sns.countplot(data=df, x="Genero", ax=ax4, palette="pastel")
+        sns.countplot(data=df, x="Gênero", ax=ax4, palette="pastel")
         ax4.set_xlabel("")
         ax4.set_ylabel("Qtd")
         st.pyplot(fig4)
@@ -79,7 +79,7 @@ csv = df.to_csv(index=False, sep=';', encoding='utf-8-sig').encode('utf-8-sig')
 st.download_button(
     label="Baixar CSV",
     data=csv,
-    file_name='planilha_pacientes.csv',
+    file_name='atendimentos.csv',
     mime='text/csv',
 )
 
